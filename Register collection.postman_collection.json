@@ -1,0 +1,533 @@
+{
+	"info": {
+		"_postman_id": "e580832e-287d-4ee3-8da7-c1fa9b170add",
+		"name": "Nowa kolekcja - ćwiczenia 20.11.22",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21116684"
+	},
+	"item": [
+		{
+			"name": "Get base api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}",
+					"host": [
+						"{{URL}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin234@wp.pl\",\r\n  \"password\": \"user2\",\r\n  \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}//user/register",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post auth login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.variables.get(\"variable_key\");\r",
+							"pm.globals.get(\"variable_key\");\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {\r",
+							"    console.log(response.json());\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin234@wp.pl\",\r\n  \"password\": \"user2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/auth/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}//auth/logout",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/task",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Flower\",\r\n  \"isDone\": true,\r\n  \"priority\": \"low\",\r\n  \"category\": [\r\n    \"general\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/task",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get task Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/task/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"task",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a31eafb4558bbf3963ab6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch task id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Animal\",\r\n  \"isDone\": true,\r\n  \"priority\": \"low\",\r\n  \"category\": [\r\n    \"string\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/task/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"task",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a31eafb4558bbf3963ab6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete task id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAd3AucGwiLCJpZCI6IjYzN2EyY2NiYzUwOTZkYzIzMTFhMmIzYiIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY4OTUxNjg0LCJleHAiOjE2Njg5NzMyODR9.MCG8ZSpqKrrik3MU-DRVGpwbAiDp_3rS0LG7Nug5CYE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/task/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"task",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a31eafb4558bbf3963ab6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post user email",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"Monserrat_Mitchell@hotmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/user/email",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/profile",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a37f5c5096dc2311a2bdc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch user id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"user2\",\r\n  \"role\": \"user\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/user/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a37f5c5096dc2311a2bdc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHdwLnBsIiwiaWQiOiI2MzdhMzdmNWM1MDk2ZGMyMzExYTJiZGMiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2Njg5NTQxMzYsImV4cCI6MTY2ODk3NTczNn0.w1IZ8P4tteoM5yRQgqT_r5Ms3zAAnE3ByYqlBbC6B2A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/user/:id",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"user",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "637a37f5c5096dc2311a2bdc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": " https://api-tester-three.vercel.app",
+			"type": "string"
+		}
+	]
+}
